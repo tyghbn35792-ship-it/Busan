@@ -3,248 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>釜山5天4夜</title>
+    <title>釜山溫馨之旅 - Cute Busan Itinerary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --pink-primary: #FFECEF;
-            --pink-dark: #D8858E;
-            --blue-primary: #E6F4F8;
-            --blue-dark: #508D9E;
-            --text-color: #2F3E46;
-        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #FAFAFA;
-            color: var(--text-color);
-            margin: 0;
-            padding: 10px;
-            font-size: 18px;
-            line-height: 1.6;
+            /* 使用可愛的圓潤字體 */
+            font-family: 'Nunito', "Microsoft JhengHei", sans-serif;
+            background-color: #f0f9ff; /* 粉藍色背景 */
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(328,100%,90%,1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(201,100%,90%,1) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: #475569;
         }
-        .header {
-            background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
-            padding: 25px 15px;
-            text-align: center;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 32px;
-            color: #4A4A4A;
-            letter-spacing: 2px;
-        }
-        .header p {
-            margin: 8px 0 0 0;
-            font-size: 16px;
-            color: #666;
-        }
-        .day-card {
-            background-color: white;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-            border: 1px solid #EFEFEF;
-        }
-        .day-title {
-            padding: 15px;
-            font-size: 22px;
-            font-weight: bold;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .day-pink .day-title { background-color: var(--pink-dark); }
-        .day-blue .day-title { background-color: var(--blue-dark); }
         
-        .item-box {
-            padding: 15px;
-            border-bottom: 1px solid #F5F5F5;
+        /* 手機 APP 風格的隱藏卷軸 */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .item-box:last-child { border-bottom: none; }
-        
-        .time-tag {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 15px;
-            font-weight: bold;
-            margin-bottom: 8px;
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+            border-radius: 10px;
         }
-        .day-pink .time-tag { background-color: var(--pink-primary); color: var(--pink-dark); }
-        .day-blue .time-tag { background-color: var(--blue-primary); color: var(--blue-dark); }
-        
-        .spot-name {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 5px;
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 10px;
         }
-        .info-text {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 10px;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
         }
-        .alert-text {
-            color: #E63946;
-            font-weight: bold;
-            font-size: 16px;
+
+        /* 桌面版柔和漸層時間線 */
+        @media (min-width: 768px) {
+            .timeline-container::before {
+                content: '';
+                position: absolute;
+                top: 2rem;
+                bottom: 2rem;
+                left: 2.25rem;
+                width: 6px;
+                background: linear-gradient(to bottom, #bae6fd, #fbcfe8, #bae6fd);
+                border-radius: 10px;
+            }
         }
-        .nav-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 5px;
-            transition: background 0.2s;
-            width: calc(100% - 40px);
-            max-width: 300px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+
+        .app-card {
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .day-pink .nav-btn { background-color: var(--pink-primary); color: var(--pink-dark); }
-        .day-blue .nav-btn { background-color: var(--blue-primary); color: var(--blue-dark); }
-        
-        .nav-btn:active { opacity: 0.8; }
+        .app-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgba(236, 72, 153, 0.15);
+        }
     </style>
 </head>
-<body>
+<body class="antialiased min-h-screen">
 
-    <div class="header">
-        <h1>釜山5天4夜</h1>
-        <p>🌸 孝親慢活・美食舒壓之旅 🌊</p>
-    </div>
+    <!-- 模擬 APP 頂部 Header -->
+    <header class="bg-white/80 backdrop-blur-md pb-12 pt-16 px-4 shadow-[0_4px_30px_rgba(0,0,0,0.03)] rounded-b-[40px] relative z-20">
+        <div class="max-w-2xl mx-auto text-center">
+            
+            <!-- 生成的手機 APP 圖示 (App Icon) -->
+            <div class="mb-6 inline-block flex flex-col items-center">
+                <div class="w-28 h-28 bg-gradient-to-tr from-sky-300 via-blue-200 to-pink-300 rounded-[30px] p-1.5 shadow-xl shadow-sky-200/60 relative overflow-hidden group">
+                    <div class="w-full h-full bg-white/90 rounded-[24px] flex items-center justify-center relative overflow-hidden">
+                        <!-- 圖示內部裝飾 -->
+                        <div class="absolute -top-4 -right-4 w-12 h-12 bg-pink-200 rounded-full blur-md opacity-60"></div>
+                        <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-sky-200 rounded-full blur-md opacity-60"></div>
+                        
+                        <!-- 行李箱與愛心 SVG -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-14 h-14 text-sky-500 relative z-10 group-hover:scale-110 transition-transform duration-300">
+                            <rect x="5" y="8" width="14" height="12" rx="3" ry="3" fill="#e0f2fe" stroke="#38bdf8"></rect>
+                            <path d="M8 8V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"></path>
+                            <!-- 可愛愛心 -->
+                            <path d="M12 15.5l-3.5-3.5a2.5 2.5 0 1 1 3.5-3.5 2.5 2.5 0 1 1 3.5 3.5L12 15.5z" fill="#f472b6" stroke="#ec4899"></path>
+                            <line x1="9" y1="20" x2="9" y2="22"></line>
+                            <line x1="15" y1="20" x2="15" y2="22"></line>
+                        </svg>
+                    </div>
+                </div>
+                <span class="mt-3 text-sm font-bold text-slate-400 tracking-wider">APP ICON</span>
+            </div>
 
-    <!-- DAY 1 -->
-    <div class="day-card day-pink">
-        <div class="day-title">
-            <span>Day 1 (1/9 六) 落地海雲台 ➡️ 19:00 無人機秀</span>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-pink-500">
+                ✈️ 釜山溫馨五日遊
+            </h1>
+            <p class="text-base text-slate-500 font-medium max-w-lg mx-auto bg-slate-50 inline-block px-4 py-2 rounded-full border border-slate-100">
+                無障礙・免吹風・吃貨專屬行程 🌸
+            </p>
         </div>
-        
-        <div class="item-box">
-            <div class="time-tag">11:15 - 13:40</div>
-            <div class="spot-name">金海機場 ➡️ 抵達海雲台飯店寄放行李</div>
-            <div class="info-text">於國際線一樓 3 號月台搭乘開往「海雲台」的 1 號線機場巴士。長輩上車吹暖氣補眠（車程約60-80分鐘）。</div>
-        </div>
+    </header>
 
-        <div class="item-box">
-            <div class="time-tag">13:50 - 15:20</div>
-            <div class="spot-name">🍖 午餐：海雲台 伍班長烤肉</div>
-            <div class="info-text">招牌「調味牛排骨」肉質極度軟嫩，長輩絕對咬得動！鐵盤周圍的爐邊蛋非常特別。</div>
-            <a href="https://naver.com" class="nav-btn" target="_blank">🗺️ Naver Map 導航</a>
-        </div>
+    <!-- 主行程內容 (以 APP 卡片風格呈現) -->
+    <main class="max-w-2xl mx-auto px-4 py-10 relative timeline-container">
 
-        <div class="item-box">
-            <div class="time-tag">15:30 - 18:15</div>
-            <div class="spot-name">🛍️ 新世界百貨 Centum City 下午茶</div>
-            <div class="alert-text">交通提示：海雲台站(203)搭2號線直達Centum City站(206)。走地下連通道進百貨，全室內免吹風！</div>
-            <div class="info-text">在世界最大百貨內悠閒逛街，找家落地窗咖啡廳喝熱柚子茶、吃草莓蛋糕。</div>
-            <a href="https://naver.com" class="nav-btn" target="_blank">🗺️ Naver Map 導航</a>
-        </div>
+        <!-- Day 1 Card (Sky Blue Theme) -->
+        <section class="bg-white/90 app-card rounded-[32px] border-4 border-white shadow-[0_8px_30px_rgb(56,189,248,0.1)] p-6 md:p-8 mb-8 relative z-10 md:ml-16">
+            <!-- Timeline dot -->
+            <div class="hidden md:flex absolute -left-14 top-8 w-12 h-12 rounded-full bg-gradient-to-br from-sky-400 to-blue-400 text-white items-center justify-center font-black shadow-lg shadow-sky-200 border-4 border-white text-xl">1</div>
+            
+            <h2 class="text-2xl font-extrabold text-sky-500 mb-5 pb-4 border-b-2 border-sky-50 flex flex-col sm:flex-row sm:items-center gap-2">
+                <span>Day 1 (1/9 六)</span>
+                <span class="text-base text-slate-400 font-bold sm:ml-2">落地海雲台 ➡️ 百貨下午茶 ➡️ 無人機秀</span>
+            </h2>
 
-        <div class="item-box">
-            <div class="time-tag">18:15 - 19:15</div>
-            <div class="spot-name">✨ 重頭戲：廣安里 M 無人機燈光秀</div>
-            <div class="alert-text">交通提示：搭2號線到廣安站(209)，務必走 5號出口(有電扶梯) 或 搭乘中央無障礙電梯。</div>
-            <div class="info-text">19:00準時開演（約10-12分鐘）。上千架無人機在冬夜空中變換壯麗主題，震撼好看！</div>
-            <a href="https://naver.com" class="nav-btn" target="_blank">🗺️ Naver Map 導航</a>
-        </div>
+            <div class="space-y-5">
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-sky-100 text-sky-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">11:15 - 12:15</span>
+                    <p class="text-slate-600 font-semibold pt-1">機場入境。🛬</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-sky-100 text-sky-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">12:15 - 13:40</span>
+                    <p class="text-slate-600 font-semibold pt-1">搭「海雲台線利木津巴士」直達飯店寄放行李。🚌</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start bg-sky-50/50 p-3 rounded-2xl">
+                    <span class="inline-block bg-orange-100 text-orange-500 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">13:50 - 15:20</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🍖 午餐：【伍班長烤肉】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">吃極嫩調味牛排骨。</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-sky-100 text-sky-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">15:30 - 18:15</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🛍️ 【新世界百貨 Centum City】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">地鐵：海雲台站(203) ➡️ Centum City站(206)。<br>
+                        <span class="text-pink-500 font-bold bg-pink-50 px-2 py-0.5 rounded-md mt-1 inline-block">全室內免吹風！</span></p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start bg-sky-50/50 p-3 rounded-2xl">
+                    <span class="inline-block bg-indigo-100 text-indigo-500 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">18:15 - 19:15</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">✨ 重頭戲：【廣安里 M 無人機秀】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">（19:00 準時開演）地鐵：Centum City站 ➡️ 廣安站(209)<br>
+                        <span class="text-sky-600 font-bold">務必走 5號出口(有電扶梯) 或 搭中央電梯。</span></p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-slate-700 text-white font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">20:00</span>
+                    <p class="text-slate-600 font-semibold pt-1">🍗 宵夜：外帶【橋村炸雞】（蜂蜜＋大蒜醬油）回房間配香蕉牛奶。🍌</p>
+                </div>
+            </div>
+        </section>
 
-        <div class="item-box">
-            <div class="time-tag">19:15 - 20:00</div>
-            <div class="spot-name">🍗 宵夜：外帶橋村炸雞回房間</div>
-            <div class="alert-text">交通提示：原路回廣安站搭2號線返海雲台站，走 7號出口(有電扶梯)。</div>
-            <div class="info-text">外帶「蜂蜜＋大蒜醬油」半半炸雞，完全不辣、外皮酥脆，配香蕉牛奶超享受。</div>
-        </div>
-    </div>
+        <!-- Day 2 Card (Pink Theme) -->
+        <section class="bg-white/90 app-card rounded-[32px] border-4 border-white shadow-[0_8px_30px_rgb(244,114,182,0.1)] p-6 md:p-8 mb-8 relative z-10 md:ml-16">
+            <!-- Timeline dot -->
+            <div class="hidden md:flex absolute -left-14 top-8 w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-rose-400 text-white items-center justify-center font-black shadow-lg shadow-pink-200 border-4 border-white text-xl">2</div>
+            
+            <h2 class="text-2xl font-extrabold text-pink-500 mb-5 pb-4 border-b-2 border-pink-50 flex flex-col sm:flex-row sm:items-center gap-2">
+                <span>Day 2 (1/10 日)</span>
+                <span class="text-base text-slate-400 font-bold sm:ml-2">海灘餵海鷗 ➡️ 岩牛排 ➡️ 西面商圈</span>
+            </h2>
 
-    <!-- DAY 2 -->
-    <div class="day-card day-blue">
-        <div class="day-title">
-            <span>Day 2 (1/10 日) 頂級岩牛排 ➡️ 西面商圈慢活</span>
-        </div>
-        
-        <div class="item-box">
-            <div class="time-tag">09:30 - 10:30</div>
-            <div class="spot-name">📸 海雲台海水浴場散步、餵海鷗</div>
-            <div class="info-text">在完全沒有階梯的木棧道散步。冬日海邊有大量海鷗，可在超商買包蝦味先讓長輩體驗餵海鷗。</div>
-        </div>
+            <div class="space-y-5">
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-pink-100 text-pink-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">09:30 - 10:30</span>
+                    <p class="text-slate-600 font-semibold pt-1">海雲台海水浴場平坦散步、買蝦味先餵海鷗。🌊</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start bg-pink-50/50 p-3 rounded-2xl">
+                    <span class="inline-block bg-orange-100 text-orange-500 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">10:45 - 12:45</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🥩 午餐：【傳聞中的岩牛排】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">吃棉花般軟嫩的調味牛排骨，必加點馬鈴薯麵。</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-pink-100 text-pink-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">13:45 - 16:45</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🛍️ 【西面樂天百貨＋地下街】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">地鐵直達車程35分鐘可補眠。<br>
+                        <span class="text-sky-500 font-bold bg-sky-50 px-2 py-0.5 rounded-md mt-1 inline-block">出站直接逛地下街，免出地面吹風！</span></p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start bg-pink-50/50 p-3 rounded-2xl">
+                    <span class="inline-block bg-orange-100 text-orange-500 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">17:00 - 18:15</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🍲 晚餐：【松亭三代豬肉湯飯】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">點「白切肉定食」，湯頭溫和不辣無腥味。</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-pink-100 text-pink-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">18:30</span>
+                    <p class="text-slate-600 font-semibold pt-1">搭2號線返海雲台站<span class="text-pink-500 font-bold">（走7號出口有電扶梯）</span>回房休息。💤</p>
+                </div>
+            </div>
+        </section>
 
-        <div class="item-box">
-            <div class="time-tag">10:45 - 12:45</div>
-            <div class="spot-name">🥩 午餐：海雲台傳聞中的岩牛排（母牛肋排）</div>
-            <div class="info-text">名店冬日有溫暖地熱包廂。必點極嫩「調味牛排骨」，最後一定要加點「馬鈴薯麵」吸滿精華！</div>
-            <a href="https://naver.com" class="nav-btn" target="_blank">🗺️ Naver Map 導航</a>
-        </div>
+        <!-- Day 3 Card (Purple Theme) -->
+        <section class="bg-white/90 app-card rounded-[32px] border-4 border-white shadow-[0_8px_30px_rgb(168,85,247,0.1)] p-6 md:p-8 mb-8 relative z-10 md:ml-16">
+            <div class="hidden md:flex absolute -left-14 top-8 w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-fuchsia-400 text-white items-center justify-center font-black shadow-lg shadow-purple-200 border-4 border-white text-xl">3</div>
+            
+            <h2 class="text-2xl font-extrabold text-purple-500 mb-5 pb-4 border-b-2 border-purple-50 flex flex-col sm:flex-row sm:items-center gap-2">
+                <span>Day 3 (1/11 一)</span>
+                <span class="text-base text-slate-400 font-bold sm:ml-2">雙重火車看海 ➡️ 現烤鮮美扇貝</span>
+            </h2>
 
-        <div class="item-box">
-            <div class="time-tag">13:00 - 16:45</div>
-            <div class="spot-name">🛍️ 西面樂天百貨 ＋ 西面地下街</div>
-            <div class="alert-text">交通提示：海雲台站搭2號線直達西面站(119/219)，車程35分鐘，長輩可在地鐵座位補眠。</div>
-            <div class="info-text">下車後不要到地面，直接走地下通道逛街。全室內暖氣強大、路面平坦，長輩逛街最舒服。</div>
-            <a href="https://naver.com" class="nav-btn" target="_blank">🗺️ Naver Map 導航</a>
-        </div>
+            <div class="space-y-5">
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-purple-100 text-purple-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">10:30 - 11:00</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🚡 去程：【天空膠囊火車】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">車內有暖氣，坐著看冬日海景超治癒！</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-purple-100 text-purple-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">11:00 - 11:30</span>
+                    <p class="text-slate-600 font-semibold pt-1">青沙浦紅白燈塔、平交道平坦散步拍大合照。📸</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start bg-purple-50/50 p-3 rounded-2xl">
+                    <span class="inline-block bg-orange-100 text-orange-500 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">11:30 - 13:15</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🐚 午餐：【秀敏家烤貝】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">炭火現烤鮮甜大扇貝、鮑魚，拌入奶油超美味。</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-purple-100 text-purple-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">13:30 - 13:45</span>
+                    <p class="text-slate-600 font-semibold pt-1">🚂 回程：【海岸小火車】不走回頭路，全朝大海吹暖氣。🌊</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-rose-100 text-rose-500 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">14:00 - 15:30</span>
+                    <p class="text-slate-700 font-extrabold pt-1">🛌 回飯店睡午覺大充電 <span class="text-rose-500 bg-rose-50 px-2 py-0.5 rounded-md ml-1">重要！</span></p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-purple-100 text-purple-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">15:30 - 18:00</span>
+                    <p class="text-slate-600 font-semibold pt-1">逛有棚子的海雲台傳統市場，買當季大草莓。🍓</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start bg-purple-50/50 p-3 rounded-2xl">
+                    <span class="inline-block bg-orange-100 text-orange-500 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">18:00 - 19:15</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🍥 晚餐：【古來思魚糕】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">熱魚糕烏龍麵，喝下去全身發熱。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="item-box">
-            <div class="time-tag">17:00 - 18:15</div>
-            <div class="spot-name">🍲 晚餐：西面老店 松亭三代豬肉湯飯</div>
-            <div class="info-text">推薦幫長輩點「白切肉定食」，湯頭濃郁無腥味，把熱湯、飯、極嫩豬肉分開上桌，最合台灣胃。</div>
-            <a href="https://naver.com" class="nav-btn" target="_blank">🗺️ Naver Map 導航</a>
-        </div>
-    </div>
+        <!-- Day 4 Card (Teal Theme) -->
+        <section class="bg-white/90 app-card rounded-[32px] border-4 border-white shadow-[0_8px_30px_rgb(20,184,166,0.1)] p-6 md:p-8 mb-8 relative z-10 md:ml-16">
+            <div class="hidden md:flex absolute -left-14 top-8 w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-emerald-400 text-white items-center justify-center font-black shadow-lg shadow-teal-200 border-4 border-white text-xl">4</div>
+            
+            <h2 class="text-2xl font-extrabold text-teal-500 mb-5 pb-4 border-b-2 border-teal-50 flex flex-col sm:flex-row sm:items-center gap-2">
+                <span>Day 4 (1/12 二)</span>
+                <span class="text-base text-slate-400 font-bold sm:ml-2">乾淨大樓吃海鮮 ➡️ 樂天超市採購</span>
+            </h2>
 
-    <!-- DAY 3 -->
-    <div class="day-card day-pink">
-        <div class="day-title">
-            <span>Day 3 (1/11 一) 天空膠囊火車 ➡️ 青沙浦現烤鮮美扇貝</span>
-        </div>
-        
-        <div class="item-box">
-            <div class="time-tag">10:30 - 11:00</div>
-            <div class="spot-name">🚡 去程：天空膠囊火車（尾浦 ➡️ 青沙浦）</div>
-            <div class="info-text">週一上午人不擠。每組長輩一台獨立小車廂，車內暖氣充足，坐著看冬日蔚藍海景，超治癒！</div>
-            <a href="https://naver.com" class="nav-btn" target="_blank">🗺️ Naver Map 導航</a>
-        </div>
+            <div class="space-y-5">
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start bg-teal-50/50 p-3 rounded-2xl">
+                    <span class="inline-block bg-orange-100 text-orange-500 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">10:45 - 13:00</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🦀 午餐：【新東亞水產大樓】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">札嘎其站(110)，<span class="text-pink-500 font-bold">走 10號出口(有電扶梯)</span>。<br>室內1樓吃現撈松葉蟹，乾淨平坦不濕滑！</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-teal-100 text-teal-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">13:15 - 14:45</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🌳 【龍頭山公園】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">南浦站 7號出口。光復路設有「中央手扶梯」直達山頂，全程免爬樓梯！</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-teal-100 text-teal-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">15:00 - 17:30</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🛒 【樂天超市光復店採購】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">下山直接進 B1 買齊零食（出示護照現退稅）。17:00 坐著看室內噴泉秀。⛲</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start bg-teal-50/50 p-3 rounded-2xl">
+                    <span class="inline-block bg-orange-100 text-orange-500 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">17:45 - 19:15</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">🐔 晚餐：【南浦蔘雞湯】</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">50年老店筷子一夾就化開，冬夜大補體力。</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-rose-100 text-rose-500 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">19:30</span>
+                    <p class="text-slate-700 font-extrabold pt-1">🚕 載滿戰利品返回海雲台<br>
+                    <span class="text-rose-500 text-sm mt-1 inline-block">建議直接在店門口叫計程車，避開下班地鐵人潮！</span></p>
+                </div>
+            </div>
+        </section>
 
-        <div class="item-box">
-            <div class="time-tag">11:00 - 13:15</div>
-            <div class="spot-name">🐚 午餐：青沙浦 秀敏家烤貝 (수민이네)</div>
-            <div class="info-text">平坦港邊散步看紅白燈塔。午餐享用新鮮大扇貝、鮑魚炭火現烤，配上奶油洋蔥，鮮甜濃郁！</div>
-            <a href="https://naver.com" class="nav-btn" target="_blank">🗺️ Naver Map 導航</a>
-        </div>
+        <!-- Day 5 Card (Blue Theme) -->
+        <section class="bg-white/90 app-card rounded-[32px] border-4 border-white shadow-[0_8px_30px_rgb(96,165,250,0.1)] p-6 md:p-8 relative z-10 md:ml-16">
+            <div class="hidden md:flex absolute -left-14 top-8 w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-400 text-white items-center justify-center font-black shadow-lg shadow-blue-200 border-4 border-white text-xl">5</div>
+            
+            <h2 class="text-2xl font-extrabold text-blue-500 mb-5 pb-4 border-b-2 border-blue-50 flex flex-col sm:flex-row sm:items-center gap-2">
+                <span>Day 5 (1/13 三)</span>
+                <span class="text-base text-slate-400 font-bold sm:ml-2">清晨沙灘散步 ➡️ 滿載返台</span>
+            </h2>
 
-        <div class="item-box">
-            <div class="time-tag">13:30 - 13:45</div>
-            <div class="spot-name">🚂 回程：海岸小火車（青沙浦 ➡️ 尾浦）</div>
-            <div class="info-text">不走回頭路！搭乘大型海岸列車返回，座位設計像電影院一樣「全部面朝大海」，吹暖氣看海。</div>
-        </div>
+            <div class="space-y-5">
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-blue-100 text-blue-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">08:30 - 09:15</span>
+                    <p class="text-slate-600 font-semibold pt-1">海雲台沙灘散步看海鷗，退房拿行李。🧳</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start">
+                    <span class="inline-block bg-blue-100 text-blue-600 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">09:15 - 10:15</span>
+                    <div>
+                        <p class="text-slate-600 font-semibold pt-1">搭2號線至沙上站，轉「釜金輕軌」直達機場。</p>
+                        <p class="text-sky-500 font-bold mt-1 text-sm bg-sky-50 px-2 py-0.5 rounded-md inline-block">全程室內無障礙電梯與連通道</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start bg-blue-50/50 p-3 rounded-2xl">
+                    <span class="inline-block bg-indigo-100 text-indigo-500 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm whitespace-nowrap">10:15 - 12:15</span>
+                    <div>
+                        <p class="text-slate-700 font-extrabold text-lg">免稅店補貨 ➡️ 12:15 起飛回台中！✈️</p>
+                        <p class="text-slate-500 text-sm mt-1 font-semibold">星宇航空，期待下次旅程！</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="item-box">
-            <div class="time-tag">14:00 - 18:00</div>
-            <div class="spot-name">🛌 下午回飯店午休 ➡️ 傍晚海雲台主街散步</div>
-            <div class="info-text">強烈安排長輩回房睡午覺1.5小時。睡飽後逛平坦的海雲台市場，買當季大顆又便宜的韓國草莓。</div>
-        </div>
+    </main>
 
-        <div class="item-box">
-            <div class="time-tag">18:00 - 19:15</div>
-            <div class="spot-name">🍥 晚餐：古來思魚糕（海雲台店）</div>
-            <div class="info-text">主街必吃地標！挑選現做年糕魚糕、起司魚糕，配一碗招牌熱魚糕烏龍麵，全身發熱沒負擔。</div>
-            <a href="https://naver.com" class="nav-btn" target="_blank">🗺️ Naver Map 導航</a>
-        </div>
-    </div>
+    <!-- Footer -->
+    <footer class="text-slate-400 py-10 text-center text-sm font-bold tracking-wider relative z-20 pb-16">
+        <p>Made with ❤️ for a wonderful trip.</p>
+        <p class="mt-1 opacity-60">© 2026 釜山溫馨行程 APP 版</p>
+    </footer>
 
-    <!-- DAY 4 -->
-    <div class="day-card day-blue">
-        <div class="day-title">
-            <span>Day 4 (1/12 二) 乾淨大樓吃海鮮 ➡️ 樂天超市大採購</span>
-        </div>
-        
-        <div class="item-box">
-            <div class="time-tag">10:45 - 13:00</div>
-            <div class="spot-name">🦀 午餐：新東亞水產市場大樓（室內吃海鮮）</div>
-            <div class="alert-text">交通提示：海雲台站搭2號線至西面站，轉1號線至札嘎其站(110)，走 10號出口(有電扶梯)。</div>
+</body>
+</html>
